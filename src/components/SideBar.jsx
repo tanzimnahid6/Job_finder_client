@@ -4,13 +4,31 @@ import Internship from "../UI/Internship"
 import FullTime from "../UI/FullTime"
 import Remote from "../UI/Remote"
 import { Link } from "react-router-dom"
+import { useDispatch } from "react-redux"
+import { addFilter } from "../features/filterJob/filterJobSlice"
 
 const Sidebar = () => {
+  const dispatch = useDispatch()
+  const handleInternship = () => {
+    dispatch(addFilter("internship"))
+  }
+  const handleFulltime = () => {
+    dispatch(addFilter("fullTime"))
+  }
+  const handleRemote = () => {
+    dispatch(addFilter("remote"))
+  }
+  const handleAllJob = () => {
+    dispatch(addFilter(""))
+  }
   return (
     <div>
       <div className="cursor-pointer">
         <Link to={"/"}>
-          <div className="flex items-center hover:text-white text-blue-400">
+          <div
+            className="flex items-center hover:text-white text-blue-400"
+            onClick={handleAllJob}
+          >
             <span>
               <BsBagCheckFill />
             </span>
@@ -18,13 +36,13 @@ const Sidebar = () => {
           </div>
         </Link>
         <div className="flex flex-col pl-5 gap-2 mt-2 text-gray-400 ">
-          <div>
+          <div onClick={handleInternship}>
             <Internship></Internship>
           </div>
-          <div>
+          <div onClick={handleFulltime}>
             <FullTime></FullTime>
           </div>
-          <div>
+          <div onClick={handleRemote}>
             <Remote></Remote>
           </div>
         </div>

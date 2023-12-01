@@ -1,27 +1,41 @@
-
 import { FaEdit } from "react-icons/fa"
 import { AiOutlineDelete } from "react-icons/ai"
 import { Link } from "react-router-dom"
 import FullTime from "../UI/FullTime"
-const JobCard = () => {
+import Internship from "../UI/Internship"
+import Remote from "../UI/Remote"
+const JobCard = ({ job }) => {
+  const { title, deadline, salary, type } = job
+
+  let typeOfJob
+  if (job && type == "internship") {
+    typeOfJob = <Internship></Internship>
+  } else if (job && type == "fullTime") {
+    typeOfJob = <FullTime></FullTime>
+  } else if (job && type == "remote") {
+    typeOfJob = <Remote></Remote>
+  } else {
+    typeOfJob = <h1>Job type unspecified</h1>
+  }
+
   return (
     <div>
       <div className="flex justify-between items-center py-4">
         <div>
-          <h1 className="text-lg font-bold">Back End Developer</h1>
+          <h1 className="text-lg font-bold">{title}</h1>
           <div className="flex gap-4">
-            <span>
-              <FullTime></FullTime>
-            </span>
-            <span>BDT 4000</span>
-            <span>Closing on 2022-12-31</span>
+            <span>{typeOfJob}</span>
+            <span>BDT {salary}</span>
+            <span>Closing on {deadline}</span>
           </div>
         </div>
 
         <div className="flex gap-4 cursor-pointer">
           <span className="flex items-center bg-[#3B82F6] hover:bg-[#3b60a1] p-1 px-3 font-semibold rounded">
             <FaEdit />
-            <Link to={'/editJob'}><span>Edit</span></Link>
+            <Link to={"/editJob"}>
+              <span>Edit</span>
+            </Link>
           </span>
           <span className="flex items-center bg-[#EF4444] hover:bg-[#8e3535] p-1 px-3 font-semibold rounded">
             <AiOutlineDelete size={22} />

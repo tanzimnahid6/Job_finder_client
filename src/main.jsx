@@ -9,10 +9,10 @@ import route from "./Route/Route.jsx"
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={route}>
-      <Provider store={store}>
+    <Provider store={store}>
+      <RouterProvider router={route}>
         <App />
-      </Provider>
-    </RouterProvider>
+      </RouterProvider>
+    </Provider>
   </React.StrictMode>
 )

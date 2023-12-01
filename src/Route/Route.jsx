@@ -28,23 +28,3 @@ const route = createBrowserRouter([
 ])
 
 export default route
-// {
-//   path: "/fullTime",
-//   element: <FullTime></FullTime>,
-// },
-// {
-//   path: "/internship",
-//   element: <Internship></Internship>,
-// },
-// {
-//   path: "/remote",
-//   element: <Remote></Remote>,
-// },
-// {
-//   path: "/addJob",
-//   element: <AddJob></AddJob>,
-// },
-// {
-//   path: "/editJob",
-//   element: <EditJob></EditJob>,
-// },

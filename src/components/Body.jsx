@@ -1,8 +1,38 @@
+import { useDispatch, useSelector } from "react-redux"
 import Search from "../UI/Search"
 import Sort from "../UI/Sort"
 import JobCard from "./JobCard"
+import { useEffect } from "react"
+import { asyncGetAllJob } from "../features/allJobs/allJobSlice"
 
 const Body = () => {
+  const dispatch = useDispatch()
+  const { jobs, isLoading } = useSelector((state) => state.jobs)
+  const { filterTopic } = useSelector((state) => state.filter)
+  console.log(filterTopic)
+  useEffect(() => {
+    dispatch(asyncGetAllJob())
+  }, [dispatch])
+  let content
+  if (isLoading) {
+    content = <h1>Loading....</h1>
+  } else if (jobs.length === 0) {
+    content = <h1>There is job</h1>
+  } else if (jobs.length > 0 && filterTopic == "internship") {
+    content = [...jobs]
+      .filter((job) => job.type == "internship")
+      .map((job) => <JobCard key={job.id} job={job}></JobCard>)
+  } else if (jobs.length > 0 && filterTopic == "fullTime") {
+    content = [...jobs]
+      .filter((job) => job.type == "fullTime")
+      .map((job) => <JobCard key={job.id} job={job}></JobCard>)
+  } else if (jobs.length > 0 && filterTopic == "remote") {
+    content = [...jobs]
+      .filter((job) => job.type == "remote")
+      .map((job) => <JobCard key={job.id} job={job}></JobCard>)
+  } else {
+    content = [...jobs].map((job) => <JobCard key={job.id} job={job}></JobCard>)
+  }
   return (
     <div className="flex flex-col py-8 px-16">
       <div>
@@ -20,12 +50,7 @@ const Body = () => {
           </div>
         </div>
       </div>
-      <div>
-        <JobCard></JobCard>
-        <JobCard></JobCard>
-        <JobCard></JobCard>
-
-      </div>
+      <div>{content}</div>
     </div>
   )
 }
