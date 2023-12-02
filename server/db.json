@@ -46,16 +46,15 @@
       "title": "Redux Developer",
       "type": "internship",
       "salary": "1800",
-      "deadline": "2023-1-31",
+      "deadline": "2023-12-31",
       "id": 8
     },
- 
     {
-      "title": "UX/UI Designer",
-      "type": "fullTime",
-      "salary": "30000",
-      "deadline": "2023-11-30",
-      "id": 10
+      "title": "Full Stack Developer",
+      "type": "remote",
+      "salary": "350",
+      "deadline": "2023-12-09",
+      "id": 9
     }
   ]
 }

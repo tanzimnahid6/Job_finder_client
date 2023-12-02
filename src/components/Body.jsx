@@ -10,11 +10,15 @@ const Body = () => {
   const dispatch = useDispatch()
   const { jobs, isLoading } = useSelector((state) => state.jobs)
   const { filterTopic, searchTopic } = useSelector((state) => state.filter)
+  const { deletedJob } = useSelector((state) => state.dJob)
+
   const { sortBy } = useSelector((state) => state.sort)
   //TODO:Need to implement sorting system...........................................pending !!!!
   useEffect(() => {
     dispatch(asyncGetAllJob())
-  }, [dispatch])
+  }, [dispatch,deletedJob])
+
+ 
   let content
   if (isLoading) {
     content = <h1>Loading....</h1>

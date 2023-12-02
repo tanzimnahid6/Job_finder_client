@@ -1,24 +1,61 @@
-import { useState } from "react"
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { asyncGetSingleJob } from "../features/singleJob/singleJobSlice";
+import { asyncEditJob } from "../features/editJob/editJobSlice";
 
 const EditJob = () => {
-  const [jobTitle, setJobTitle] = useState("")
-  const [jobType, setJobType] = useState("")
-  const [salary, setSalary] = useState("")
-  const [date, setDate] = useState("")
+  const dispatch = useDispatch();
+  const { job } = useSelector((state) => state.singleJob);
+  const { id } = useParams();
+
+  const [jobTitle, setJobTitle] = useState("");
+  const [jobType, setJobType] = useState("");
+  const [salary, setSalary] = useState("");
+  const [date, setDate] = useState("");
+
+  useEffect(() => {
+    // Fetch job details when the component mounts or when the id changes
+    dispatch(asyncGetSingleJob(id));
+  }, [id, dispatch]);
+
+  useEffect(() => {
+    // Update local state when the job details are available
+    if (job) {
+      setJobTitle(job.title || "");
+      setJobType(job.type || "");
+      setSalary(job.salary || "");
+      setDate(job.deadline || "");
+    }
+  }, [job]);
 
   const jobTitles = [
-    "Software Engineer",
-    "Data Scientist",
+    "Redux Developer",
+    "Full Stack Developer",
+    "Android App Developer",
+    "Social Media Manager",
     "Product Manager",
-    "UX/UI Designer",
-  ]
-  const jobTypes = ["Full-time", "Part-time", "Contract", "Internship"]
+    "QA Engineer",
+    "DevOps Engineer",
+  ];
+  const jobTypes = ["fullTime", "remote", "internship"];
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    // You can add logic here to handle form submission
-    console.log("Form submitted:", { jobTitle, jobType, salary, date })
-  }
+    e.preventDefault();
+    console.log("Form submitted:", {
+      title: jobTitle,
+      type: jobType,
+      salary,
+      deadline: date,
+    });
+    const body = {
+      title: jobTitle,
+      type: jobType,
+      salary,
+      deadline: date,
+    }
+    dispatch(asyncEditJob({id,body}))
+  };
 
   return (
     <div className=" mx-auto mt-8">
@@ -36,8 +73,9 @@ const EditJob = () => {
             onChange={(e) => setJobTitle(e.target.value)}
             className="w-[500px] p-2  rounded bg-[#334155]"
             required
+           
           >
-            <option value="" disabled>
+            <option  disabled>
               Select Job Title
             </option>
             {jobTitles.map((title, index) => (
@@ -88,11 +126,11 @@ const EditJob = () => {
         </div>
 
         <button type="submit" className="btn btn-primary mt-2">
-           Update
+          Update
         </button>
       </form>
     </div>
   )
-}
+};
 
-export default EditJob
+export default EditJob;

@@ -10,10 +10,13 @@ const AddJob = () => {
   const [date, setDate] = useState("")
 
   const jobTitles = [
-    "Software Engineer",
-    "Data Scientist",
+    "Redux Developer",
+    "Full Stack Developer",
+    "Android App Developer",
+    "Social Media Manager",
     "Product Manager",
-    "UX/UI Designer",
+    "QA Engineer",
+    "DevOps Engineer"
   ]
   const jobTypes = ["fullTime", "remote", "Internship"]
 

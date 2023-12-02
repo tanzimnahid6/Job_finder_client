@@ -20,7 +20,7 @@ const route = createBrowserRouter([
         element: <AddJob></AddJob>,
       },
       {
-        path: "/editJob",
+        path: "/editJob/:id",
         element: <EditJob></EditJob>,
       },
     ],
