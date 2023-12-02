@@ -1,9 +1,16 @@
+import { useState } from "react"
+import { useDispatch } from "react-redux"
+import { addSearch } from "../features/filterJob/filterJobSlice"
+
 const Search = () => {
+ 
+  const dispatch = useDispatch()
+
   return (
     <>
       {/* component */}
       <div className="flex items-center justify-center   bg-[#1E293B]">
-        <form>
+        <form >
           <div className="relative text-gray-600 focus-within:text-gray-400">
             <span className="absolute inset-y-0 left-0 flex items-center pl-2">
               <button
@@ -28,6 +35,7 @@ const Search = () => {
               name="q"
               className="py-[6px] text-sm text-white  bg-gray-900 rounded-md pl-10 focus:outline-none  focus:text-white"
               placeholder="Search..."
+              onChange={(e) => dispatch(addSearch(e.target.value))}
               autoComplete="off"
             />
           </div>

@@ -1,6 +1,9 @@
 import { useState } from "react"
+import { useDispatch } from "react-redux"
+import { asyncAddJob } from "../features/addJob/addJobSlice"
 
 const AddJob = () => {
+  const dispatch = useDispatch()
   const [jobTitle, setJobTitle] = useState("")
   const [jobType, setJobType] = useState("")
   const [salary, setSalary] = useState("")
@@ -12,12 +15,11 @@ const AddJob = () => {
     "Product Manager",
     "UX/UI Designer",
   ]
-  const jobTypes = ["Full-time", "Part-time", "Contract", "Internship"]
+  const jobTypes = ["fullTime", "remote", "Internship"]
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // You can add logic here to handle form submission
-    console.log("Form submitted:", { jobTitle, jobType, salary, date })
+    dispatch(asyncAddJob({ title:jobTitle, type:jobType, salary, deadline:date }))
   }
 
   return (

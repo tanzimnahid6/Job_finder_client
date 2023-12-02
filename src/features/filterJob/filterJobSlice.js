@@ -1,7 +1,8 @@
-import {  createSlice } from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
   filterTopic: "",
+  searchTopic: "",
 }
 const filterJobSlice = createSlice({
   name: "filterJob",
@@ -10,8 +11,11 @@ const filterJobSlice = createSlice({
     addFilter: (state, action) => {
       state.filterTopic = action.payload
     },
+    addSearch: (state, action) => {
+      state.searchTopic = action.payload
+    },
   },
 })
 
 export default filterJobSlice.reducer
-export const { addFilter } = filterJobSlice.actions
+export const { addFilter ,addSearch} = filterJobSlice.actions

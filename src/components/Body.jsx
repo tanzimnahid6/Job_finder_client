@@ -4,12 +4,14 @@ import Sort from "../UI/Sort"
 import JobCard from "./JobCard"
 import { useEffect } from "react"
 import { asyncGetAllJob } from "../features/allJobs/allJobSlice"
+import searchJobsByTitle from "../util/searchJob"
 
 const Body = () => {
   const dispatch = useDispatch()
   const { jobs, isLoading } = useSelector((state) => state.jobs)
-  const { filterTopic } = useSelector((state) => state.filter)
-  console.log(filterTopic)
+  const { filterTopic, searchTopic } = useSelector((state) => state.filter)
+  const { sortBy } = useSelector((state) => state.sort)
+  //TODO:Need to implement sorting system...........................................pending !!!!
   useEffect(() => {
     dispatch(asyncGetAllJob())
   }, [dispatch])
@@ -17,7 +19,7 @@ const Body = () => {
   if (isLoading) {
     content = <h1>Loading....</h1>
   } else if (jobs.length === 0) {
-    content = <h1>There is job</h1>
+    content = <h1>There is no job</h1>
   } else if (jobs.length > 0 && filterTopic == "internship") {
     content = [...jobs]
       .filter((job) => job.type == "internship")
@@ -30,6 +32,9 @@ const Body = () => {
     content = [...jobs]
       .filter((job) => job.type == "remote")
       .map((job) => <JobCard key={job.id} job={job}></JobCard>)
+  } else if (jobs.length > 0 && searchTopic !== "") {
+    const searchJob = searchJobsByTitle(jobs, searchTopic)
+    content = searchJob.map((job) => <JobCard key={job.id} job={job}></JobCard>)
   } else {
     content = [...jobs].map((job) => <JobCard key={job.id} job={job}></JobCard>)
   }
