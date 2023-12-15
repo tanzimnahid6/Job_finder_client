@@ -22,8 +22,8 @@ const Sidebar = () => {
     dispatch(addFilter(""))
   }
   return (
-    <div>
-      <div className="cursor-pointer">
+    <div className="flex items-start justify-between md:flex-col">
+      <div className="cursor-pointer  flex-col flex text-sm md:text-xl">
         <Link to={"/"}>
           <div
             className="flex items-center hover:text-white text-blue-400"
@@ -35,8 +35,8 @@ const Sidebar = () => {
             <h1 className=" font-semibold ">All Available Jobs </h1>
           </div>
         </Link>
-        <div className="flex flex-col pl-5 gap-2 mt-2 text-gray-400 ">
-          <div onClick={handleInternship}>
+        <div className=" pl-5 gap-2 mt-2 text-gray-400 ">
+          <div onClick={handleInternship} >
             <Internship></Internship>
           </div>
           <div onClick={handleFulltime}>
@@ -46,14 +46,20 @@ const Sidebar = () => {
             <Remote></Remote>
           </div>
         </div>
+        <div>
+       
+        </div>
+
       </div>
-      <div className="flex items-center mt-2 gap-2 text-gray-400 hover:text-white cursor-pointer">
-        <span>
+      <div className="flex items-center md:mt-2 gap-2 text-gray-400 hover:text-white cursor-pointer text-sm md:text-xl">
+        <span >
           <BsClipboardPlus />
         </span>
-        <Link to={"/addJob"}>
+        <Link to={"/addJob"} >
           <h1>Add New Job</h1>
         </Link>
+        
+
       </div>
     </div>
   )

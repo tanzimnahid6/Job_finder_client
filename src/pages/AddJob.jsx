@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { asyncAddJob } from "../features/addJob/addJobSlice"
+import { Helmet } from "react-helmet-async"
 
 const AddJob = () => {
   const dispatch = useDispatch()
@@ -27,19 +28,23 @@ const AddJob = () => {
 
   return (
     <div className=" mx-auto mt-8">
-      <h1 className="text-center font-extrabold text-4xl text-white">
+                      <Helmet>
+        <title>Jobs |Add</title>
+      </Helmet>
+      <h1 className="text-center font-extrabold md:text-4xl text-white my-10 text-2xl">
         Add New Job
       </h1>
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col gap-4 items-center mx-auto bg-transparent p-8  rounded shadow-md"
+        className="flex flex-col  gap-4 md:items-center mx-auto bg-transparent md:p-8 p-2   rounded shadow-md  text-sm"
       >
-        <div className="flex  items-center justify-between  w-[600px]">
-          <label className="block mb-2 text-white">Job Title</label>
+        <div className="flex  items-center justify-between  md:w-[600px] ">
+          <label className=" mb-2 text-white md:block hidden">Job Title</label>
+          <label className="block mb-2 text-white md:hidden"> Title</label>
           <select
             value={jobTitle}
             onChange={(e) => setJobTitle(e.target.value)}
-            className="w-[500px] p-2  rounded bg-[#334155]"
+            className="md:w-[500px] p-2 w-[200px] rounded bg-[#334155]"
             required
           >
             <option value="" disabled>
@@ -52,12 +57,13 @@ const AddJob = () => {
             ))}
           </select>
         </div>
-        <div className="flex  items-center justify-between  w-[600px]">
-          <label className="block mb-2 text-white">Job Type</label>
+        <div className="flex  items-center justify-between  md:w-[600px]">
+          <label className=" mb-2 text-white md:block hidden">Job Type</label>
+          <label className=" mb-2 text-white block md:hidden"> Type</label>
           <select
             value={jobType}
             onChange={(e) => setJobType(e.target.value)}
-            className="w-[500px] p-2  rounded bg-[#334155]"
+            className="md:w-[500px] p-2 w-[200px] rounded bg-[#334155]"
             required
           >
             <option value="" disabled>
@@ -71,28 +77,29 @@ const AddJob = () => {
           </select>
         </div>
 
-        <div className="flex  items-center justify-between  w-[600px]">
+        <div className="flex  items-center justify-between  md:w-[600px] ">
           <label className="block mb-2 text-white">Salary</label>
+          
           <input
             type="text"
             value={salary}
             onChange={(e) => setSalary(e.target.value)}
-            className="w-[500px] p-2  rounded bg-[#334155]"
+            className="md:w-[500px] w-[200px] p-2 rounded bg-[#334155]"
             required
           />
         </div>
-        <div className="flex  items-center justify-between  w-[600px]">
+        <div className="flex  items-center justify-between  md:w-[600px] ">
           <label className="block mb-2 text-white">Date</label>
           <input
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            className="w-[500px] p-2  rounded bg-[#334155]"
+            className="md:w-[500px] p-2 w-[200px] rounded bg-[#334155]"
             required
           />
         </div>
 
-        <button type="submit" className="btn btn-primary mt-2">
+        <button type="submit" className="btn btn-primary mt-2 md:w-2/12  w-5/12 mx-auto mb-10"  data-aos="fade-up">
           Add Job
         </button>
       </form>

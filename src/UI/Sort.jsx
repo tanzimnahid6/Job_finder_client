@@ -14,7 +14,7 @@ const Sort = () => {
 
   return (
     <select
-      className="select select-bordered select-sm w-36"
+      className="select select-bordered select-sm w-full rounded-md"
       value={sortValue}
       onChange={handleSortChange}
     >

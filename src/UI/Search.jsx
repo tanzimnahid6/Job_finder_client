@@ -8,7 +8,6 @@ const Search = () => {
 
   return (
     <>
-      {/* component */}
       <div className="flex items-center justify-center   bg-[#1E293B]">
         <form >
           <div className="relative text-gray-600 focus-within:text-gray-400">
@@ -33,7 +32,7 @@ const Search = () => {
             <input
               type="search"
               name="q"
-              className="py-[6px] text-sm text-white  bg-gray-900 rounded-md pl-10 focus:outline-none  focus:text-white"
+              className="py-[6px] text-sm text-white  bg-gray-900 rounded-md pl-10 focus:outline-none w-full  focus:text-white"
               placeholder="Search..."
               onChange={(e) => dispatch(addSearch(e.target.value))}
               autoComplete="off"

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { asyncGetSingleJob } from "../features/singleJob/singleJobSlice";
 import { asyncEditJob } from "../features/editJob/editJobSlice";
+import { Helmet } from "react-helmet-async";
 
 const EditJob = () => {
   const dispatch = useDispatch();
@@ -59,77 +60,83 @@ const EditJob = () => {
 
   return (
     <div className=" mx-auto mt-8">
-      <h1 className="text-center font-extrabold text-4xl text-white">
-        Update Your Job
-      </h1>
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col gap-4 items-center mx-auto bg-transparent p-8  rounded shadow-md"
-      >
-        <div className="flex  items-center justify-between  w-[600px]">
-          <label className="block mb-2 text-white">Job Title</label>
-          <select
-            value={jobTitle}
-            onChange={(e) => setJobTitle(e.target.value)}
-            className="w-[500px] p-2  rounded bg-[#334155]"
-            required
-           
-          >
-            <option  disabled>
-              Select Job Title
+                   <Helmet>
+        <title>Jobs | Update</title>
+      </Helmet>
+   
+    <h1 className="text-center font-extrabold md:text-4xl text-white my-10 text-2xl">
+      Update Your Job
+    </h1>
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col  gap-4 md:items-center mx-auto bg-transparent md:p-8 p-2   rounded shadow-md  text-sm"
+    >
+      <div className="flex  items-center justify-between  md:w-[600px]">
+      <label className=" mb-2 text-white md:block hidden">Job Title</label>
+        <label className="block mb-2 text-white md:hidden"> Title</label>
+        <select
+          value={jobTitle}
+          onChange={(e) => setJobTitle(e.target.value)}
+          className="md:w-[500px] p-2 w-[200px] rounded bg-[#334155]"
+          required
+         
+        >
+          <option  disabled>
+            Select Job Title
+          </option>
+          {jobTitles.map((title, index) => (
+            <option key={index} value={title}>
+              {title}
             </option>
-            {jobTitles.map((title, index) => (
-              <option key={index} value={title}>
-                {title}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="flex  items-center justify-between  w-[600px]">
-          <label className="block mb-2 text-white">Job Type</label>
-          <select
-            value={jobType}
-            onChange={(e) => setJobType(e.target.value)}
-            className="w-[500px] p-2  rounded bg-[#334155]"
-            required
-          >
-            <option value="" disabled>
-              Select Job Type
+          ))}
+        </select>
+      </div>
+      <div className="flex  items-center justify-between  md:w-[600px]">
+      <label className=" mb-2 text-white md:block hidden">Job Type</label>
+        <label className=" mb-2 text-white block md:hidden"> Type</label>
+        <select
+          value={jobType}
+          onChange={(e) => setJobType(e.target.value)}
+          className="md:w-[500px] p-2 w-[200px] rounded bg-[#334155]"
+          required
+        >
+          <option value="" disabled>
+            Select Job Type
+          </option>
+          {jobTypes.map((type, index) => (
+            <option key={index} value={type}>
+              {type}
             </option>
-            {jobTypes.map((type, index) => (
-              <option key={index} value={type}>
-                {type}
-              </option>
-            ))}
-          </select>
-        </div>
+          ))}
+        </select>
+      </div>
 
-        <div className="flex  items-center justify-between  w-[600px]">
-          <label className="block mb-2 text-white">Salary</label>
-          <input
-            type="text"
-            value={salary}
-            onChange={(e) => setSalary(e.target.value)}
-            className="w-[500px] p-2  rounded bg-[#334155]"
-            required
-          />
-        </div>
-        <div className="flex  items-center justify-between  w-[600px]">
-          <label className="block mb-2 text-white">Date</label>
-          <input
-            type="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            className="w-[500px] p-2  rounded bg-[#334155]"
-            required
-          />
-        </div>
+      <div className="flex  items-center justify-between  md:w-[600px]">
+        <label className="block mb-2 text-white">Salary</label>
+        <input
+          type="text"
+          value={salary}
+          onChange={(e) => setSalary(e.target.value)}
+          className="md:w-[500px] w-[200px] p-2 rounded bg-[#334155]"
+          required
+        />
+      </div>
+      <div className="flex  items-center justify-between  md:w-[600px] ">
+        <label className="block mb-2 text-white">Date</label>
+        <input
+          type="date"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+          className="md:w-[500px] p-2 w-[200px] rounded bg-[#334155]"
+          required
+        />
+      </div>
 
-        <button type="submit" className="btn btn-primary mt-2">
-          Update
-        </button>
-      </form>
-    </div>
+      <button type="submit" className="btn btn-primary mt-2 md:w-2/12  w-5/12 mx-auto mb-10 btn-sm md:btn-md"  data-aos="fade-up">
+        Update
+      </button>
+    </form>
+  </div>
   )
 };
 
