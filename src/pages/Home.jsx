@@ -1,8 +1,8 @@
-import { Outlet } from "react-router-dom"
+import { Outlet } from "react-router-dom";
 
-import Navbar from "../components/Navbar"
-import SideBar from "../components/SideBar"
-import { Helmet } from "react-helmet-async"
+import Navbar from "../components/Navbar";
+import SideBar from "../components/SideBar";
+import { Helmet } from "react-helmet-async";
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -10,13 +10,13 @@ import "aos/dist/aos.css";
 const Home = () => {
   useEffect(() => {
     AOS.init({
-      duration: 2000, // Animation duration in milliseconds
-      once: true, // Only animate once
+      duration: 2000, 
+      once: true,
     });
   }, []);
   return (
     <div>
-                    <Helmet>
+      <Helmet>
         <title>Jobs | Available</title>
       </Helmet>
       <Navbar></Navbar>
@@ -29,7 +29,7 @@ const Home = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

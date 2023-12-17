@@ -10,6 +10,7 @@ const EditJob = () => {
   const { job } = useSelector((state) => state.singleJob);
   const { id } = useParams();
 
+
   const [jobTitle, setJobTitle] = useState("");
   const [jobType, setJobType] = useState("");
   const [salary, setSalary] = useState("");

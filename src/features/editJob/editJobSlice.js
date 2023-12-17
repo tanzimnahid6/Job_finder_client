@@ -9,8 +9,8 @@ const initialState = {
 
 export const asyncEditJob = createAsyncThunk("job/editJob", async (details) => {
   const { id, body } = details;
-  const res = await fetch(`http://localhost:3000/jobs/${id}`, {
-    method: "PUT",
+  const res = await fetch(`http://localhost:5000/jobs/${id}`, {
+    method: "PATCH",
     body: JSON.stringify(body),
     headers: {
       "Content-type": "application/json; charset=UTF-8",

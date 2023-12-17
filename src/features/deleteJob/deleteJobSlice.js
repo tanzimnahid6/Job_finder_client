@@ -7,7 +7,7 @@ const initialState = {
 }
 
 export const asyncDeleteJob = createAsyncThunk("job/deleteJob", async (id) => {
-  const res = await fetch(`http://localhost:3000/jobs/${id}`,{
+  const res = await fetch(`http://localhost:5000/jobs/${id}`,{
     method:'DELETE'
   })
   const data = await res.json()
