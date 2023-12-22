@@ -1,0 +1,2 @@
+1.have to change path image
+2.have to added login and logout page

@@ -15,14 +15,15 @@ const Body = () => {
   const { deletedJob } = useSelector((state) => state.dJob);
 
   const { sortBy } = useSelector((state) => state.sort);
-  //TODO:Need to implement sorting system...........................................pending !!!!
+  
+ 
   useEffect(() => {
     dispatch(asyncGetAllJob());
   }, [dispatch, deletedJob]);
   useEffect(() => {
     Aos.init({
-      duration: 2000, // Animation duration in milliseconds
-      once: true, // Only animate once
+      duration: 2000, 
+      once: true,
     });
   }, []);
 
@@ -32,26 +33,89 @@ const Body = () => {
   } else if (jobs.length === 0) {
     content = <h1>There is no job</h1>;
   } else if (jobs.length > 0 && filterTopic == "internship") {
-    content = [...jobs]
-      .filter((job) => job.type == "internship")
-      .map((job) => <JobCard key={job._id} job={job}></JobCard>);
+    //filter with salary in internship state ===start
+    if (sortBy == "default") {
+      content = [...jobs]
+        .filter((job) => job.type == "internship")
+        .map((job) => <JobCard key={job._id} job={job}></JobCard>);
+    } else if (sortBy == "lowToHigh") {
+      content = [...jobs]
+        .filter((job) => job.type == "internship")
+        .sort((a, b) => a.salary - b.salary)
+        .map((job) => <JobCard key={job._id} job={job}></JobCard>);
+    } else if (sortBy == "highToLow") {
+      content = [...jobs]
+        .filter((job) => job.type == "internship")
+        .sort((a, b) => b.salary - a.salary)
+        .map((job) => <JobCard key={job._id} job={job}></JobCard>);
+    } else {
+      content = [...jobs]
+        .filter((job) => job.type == "internship")
+        .map((job) => <JobCard key={job._id} job={job}></JobCard>);
+    }
+    //filter with salary in internship state ===end
   } else if (jobs.length > 0 && filterTopic == "fullTime") {
-    content = [...jobs]
-      .filter((job) => job.type == "fullTime")
-      .map((job) => <JobCard key={job._id} job={job}></JobCard>);
+    //filter with salary in fulltime state ===start
+    if (sortBy == "default") {
+      content = [...jobs]
+        .filter((job) => job.type == "fullTime")
+        .map((job) => <JobCard key={job._id} job={job}></JobCard>);
+    } else if (sortBy == "lowToHigh") {
+      content = [...jobs]
+        .filter((job) => job.type == "fullTime")
+        .sort((a, b) => a.salary - b.salary)
+        .map((job) => <JobCard key={job._id} job={job}></JobCard>);
+    } else if (sortBy == "highToLow") {
+      content = [...jobs]
+        .filter((job) => job.type == "fullTime")
+        .sort((a, b) => b.salary - a.salary)
+        .map((job) => <JobCard key={job._id} job={job}></JobCard>);
+    } else {
+      content = [...jobs]
+        .filter((job) => job.type == "fullTime")
+        .map((job) => <JobCard key={job._id} job={job}></JobCard>);
+    }
+    //filter with salary in fulltime state === end
   } else if (jobs.length > 0 && filterTopic == "remote") {
-    content = [...jobs]
-      .filter((job) => job.type == "remote")
-      .map((job) => <JobCard key={job._id} job={job}></JobCard>);
+    //filter with salary in remote state === start
+    if (sortBy == "default") {
+      content = [...jobs]
+        .filter((job) => job.type == "remote")
+        .map((job) => <JobCard key={job._id} job={job}></JobCard>);
+    } else if (sortBy == "lowToHigh") {
+      content = [...jobs]
+        .filter((job) => job.type == "remote")
+        .sort((a, b) => a.salary - b.salary)
+        .map((job) => <JobCard key={job._id} job={job}></JobCard>);
+    } else if (sortBy == "highToLow") {
+      content = [...jobs]
+        .filter((job) => job.type == "remote")
+        .sort((a, b) => b.salary - a.salary)
+        .map((job) => <JobCard key={job._id} job={job}></JobCard>);
+    } else {
+      content = [...jobs]
+        .filter((job) => job.type == "remote")
+        .map((job) => <JobCard key={job._id} job={job}></JobCard>);
+    }
   } else if (jobs.length > 0 && searchTopic !== "") {
     const searchJob = searchJobsByTitle(jobs, searchTopic);
     content = searchJob.map((job) => (
       <JobCard key={job._id} job={job}></JobCard>
     ));
   } else {
-    content = [...jobs].map((job) => (
-      <JobCard key={job._id} job={job}></JobCard>
-    ));
+    if (sortBy == "default") {
+      content = [...jobs].map((job) => (
+        <JobCard key={job._id} job={job}></JobCard>
+      ));
+    } else if (sortBy === "lowToHigh") {
+      content = [...jobs]
+        .sort((a, b) => a.salary - b.salary)
+        .map((job) => <JobCard key={job._id} job={job}></JobCard>);
+    }else if(sortBy == "highToLow"){
+      content = [...jobs]
+      .sort((a, b) => b.salary - a.salary)
+      .map((job) => <JobCard key={job._id} job={job}></JobCard>);
+    }
   }
   return (
     <div className="flex flex-col py-8 md:px-16 px-5  ">

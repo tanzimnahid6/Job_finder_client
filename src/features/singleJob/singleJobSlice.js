@@ -10,7 +10,7 @@ const initialState = {
 export const asyncGetSingleJob = createAsyncThunk(
   "job/singleJob",
   async (id) => {
-    const res = await fetch(`http://localhost:5000/jobs/${id}`);
+    const res = await fetch(`https://job-finder-server-one.vercel.app/jobs/${id}`);
     const data = await res.json();
     return data;
   }

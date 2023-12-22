@@ -1,14 +1,15 @@
-import { useState } from "react"
-import { useDispatch } from "react-redux"
-import { asyncAddJob } from "../features/addJob/addJobSlice"
-import { Helmet } from "react-helmet-async"
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { asyncAddJob } from "../features/addJob/addJobSlice";
+import { Helmet } from "react-helmet-async";
+import Swal from "sweetalert2";
 
 const AddJob = () => {
-  const dispatch = useDispatch()
-  const [jobTitle, setJobTitle] = useState("")
-  const [jobType, setJobType] = useState("")
-  const [salary, setSalary] = useState("")
-  const [date, setDate] = useState("")
+  const dispatch = useDispatch();
+  const [jobTitle, setJobTitle] = useState("");
+  const [jobType, setJobType] = useState("");
+  const [salary, setSalary] = useState("");
+  const [date, setDate] = useState("");
 
   const jobTitles = [
     "Redux Developer",
@@ -17,19 +18,33 @@ const AddJob = () => {
     "Social Media Manager",
     "Product Manager",
     "QA Engineer",
-    "DevOps Engineer"
-  ]
-  const jobTypes = ["fullTime", "remote", "Internship"]
+    "DevOps Engineer",
+  ];
+  const jobTypes = ["fullTime", "remote", "Internship"];
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    dispatch(asyncAddJob({ title:jobTitle, type:jobType, salary, deadline:date }))
-  }
+    e.preventDefault();
+    dispatch(
+      asyncAddJob({ title: jobTitle, type: jobType, salary, deadline: date })
+    );
+    setJobTitle("");
+    setJobType("");
+    setSalary("");
+    setDate("");
+
+    setTimeout(() => {
+      Swal.fire({
+        title: "Well Done! ",
+        text: "Your job is successfully add!",
+        icon: "success",
+      });
+    }, 1500);
+  };
 
   return (
     <div className=" mx-auto mt-8">
-                      <Helmet>
-        <title>Jobs |Add</title>
+      <Helmet>
+        <title>Jobs | Add</title>
       </Helmet>
       <h1 className="text-center font-extrabold md:text-4xl text-white my-10 text-2xl">
         Add New Job
@@ -79,7 +94,7 @@ const AddJob = () => {
 
         <div className="flex  items-center justify-between  md:w-[600px] ">
           <label className="block mb-2 text-white">Salary</label>
-          
+
           <input
             type="text"
             value={salary}
@@ -99,12 +114,16 @@ const AddJob = () => {
           />
         </div>
 
-        <button type="submit" className="btn btn-primary mt-2 md:w-2/12  w-5/12 mx-auto mb-10"  data-aos="fade-up">
+        <button
+          type="submit"
+          className="btn btn-primary mt-2 md:w-2/12  w-5/12 mx-auto mb-10"
+          data-aos="fade-up"
+        >
           Add Job
         </button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default AddJob
+export default AddJob;
